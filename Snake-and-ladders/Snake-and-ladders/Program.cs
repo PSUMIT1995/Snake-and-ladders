@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Welcome to Snake-and-ladders");
-int position = 0;
-Console.WriteLine("Welcome player");
+Random random = new Random();
+int num = random.Next(1, 7);
+Console.WriteLine(num);
 
-Console.WriteLine("Current position: " + position);
+
+
