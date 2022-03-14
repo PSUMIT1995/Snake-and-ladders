@@ -1,65 +1,71 @@
 ﻿// See https://aka.ms/new-console-template for more information
    Console.WriteLine("Welcome to Snake-and-ladders");
 
-const int START = 0;
-const int FINISH = 100;
 const int NO_PLAY = 0;
 const int LADDER = 1;
 const int SNAKE = 2;
+int positionOne = 0;
+int positionTwo = 0;
+int loopCount = 0;
+int currentPlayer = 1;
+int currentPlayerPos = 0;
+
 Random random = new Random();
 
-int Roll_Dice()
+while (positionOne < 100 && positionTwo < 100)
 {
-    return random.Next(1, 7);
-}
-int Player_Move_Option(int player_Roll_Dice)
-{
-    int check_Player_Option = random.Next(0, 3);
-    int player_Move = 0;
-    switch (check_Player_Option)
+    loopCount++;
+    if (currentPlayerPos == 1)
     {
-        case LADDER:
-            player_Move = player_Roll_Dice;
-            break;
-        case SNAKE:
-            player_Move = -player_Roll_Dice;
-            break;
-        default:
-            break;
+        currentPlayerPos = positionOne;
     }
-    return player_Move;
-}
-
-{
-    int player_position = 0, player_Next_Position;
-    int dice_roll_count = 0;
-
-    //Repeats till the Player reaches the winning position 100.
-    while (player_position < FINISH)
+    else
     {
-        // player rolls the dice and gets the value
-        int player_Roll_Dice = Roll_Dice();
+        currentPlayerPos = positionTwo;
 
-        // number of times the dice was played is counted
-        dice_roll_count++;
-
-        // The Player then checks for a Option.
-        int player_move = Player_Move_Option(player_Roll_Dice);
-
-        if (player_position + player_move > FINISH)
-            player_Next_Position = player_position;
-        else
-            player_Next_Position = player_position + player_move;
-
-        if (player_Next_Position < START)
-            player_position = START;
-        else
-            player_position = player_Next_Position;
-
-        // Player current position After rolling the Dice
-        Console.WriteLine("Player current position After rolling the Dice is " + player_position);
     }
-    Console.WriteLine();
-    Console.WriteLine("Player current position After the game is " + player_position);
-    Console.WriteLine("Total Number of Dice Roll in the game is " + dice_roll_count);
+
+    int diceNum = random.Next(0, 7),
+    result = random.Next(0, 3);
+
+    if (result == LADDER)
+    {
+        {
+            if (currentPlayerPos + diceNum <= 100)
+            {
+                currentPlayerPos += diceNum;
+            }
+            else if (result == SNAKE)
+                if (currentPlayerPos - diceNum >= 0)
+
+                {
+                    currentPlayerPos -= diceNum;
+                }
+                else
+                {
+                    currentPlayerPos = 0;
+                }
+
+        }
+        if (currentPlayer == 1)
+        {
+            positionOne = currentPlayerPos;
+            currentPlayer = 2;
+        }
+        else
+        {
+            positionTwo = currentPlayerPos;
+            currentPlayer = 1;
+        }
+    }
 }
+
+if (positionOne == 100)
+{
+    Console.WriteLine("Player One Wins");
+}
+else if (positionTwo == 100)
+{
+    Console.WriteLine("Player Two Wins");
+}
+Console.WriteLine("Dice Rolled :" + loopCount + "times");
